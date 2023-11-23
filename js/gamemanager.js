@@ -55,6 +55,7 @@ const moveTetra = {
     },
     82 : function(){
         boarde.resetBoard();
+        draw();
     }
 }
 Object.freeze(moveTetra);
