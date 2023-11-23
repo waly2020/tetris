@@ -52,6 +52,9 @@ const moveTetra = {
             cancelAnimationFrame(animationFunctionId);
         }
         play = !play;
+    },
+    82 : function(){
+        boarde.resetBoard();
     }
 }
 Object.freeze(moveTetra);
@@ -59,6 +62,7 @@ Object.freeze(moveTetra);
 
 document.addEventListener("keyup",(e)=>{
     let code = e.keyCode;
+    console.log(code);
     if(moveTetra[code]){
         if(code >= 37 && code <= 40){
             if(boarde.pieceCanMove(moveTetra[code](currentTetra))){
