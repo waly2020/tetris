@@ -2,15 +2,97 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: monospace;
+    text-transform: uppercase;
 }
+
 .content-tetra{
+    padding: 20px;
     display: flex;
-    align-items: flex-end;
+    gap: 30px;
+}
+#canvas{
+    border: solid 2px #aaa;
+}
+.tetris_logo img{
+    height: 90px;
+}
+
+.content_data_user{
+    margin: 30px 0;
+}
+
+.content_data_user p{
+    color: #aaa;
+    margin: 8px 0;
+    padding: 6px 5px;
+    font-size: 20px;
+    text-transform: uppercase;
+    border: solid 2px #eee;
+}
+
+.content_canvas{
+    display: flex;
+    gap: 30px;
+}
+.canvas > p{
+    border-bottom: solid 2px #aaa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #aaa;
+    font-size: 18px;
+}
+.canvas{
+    display: grid;
+    grid-template-rows: 40px 1fr;
+    border: solid 2px #aaa;
     gap: 10px;
 }
-canvas{
-    border: solid 2px #000;
+.btn_play{
+    padding: 20px 40px;
+    margin: 20px 0;
+    width: 100%;
+    background-color: greenyellow;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 17px;
 }
-.instruction p{
+.instruction > h3{
+    color: #aaa;
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+.instruction > p{
     margin: 10px 0;
+    color: #aaa;
+}
+
+.inst_icon{
+    padding: 8px 15px;
+    border: solid 2px #aaa;
+    display: inline-block;
+    text-transform: uppercase;
+    font-size: 18px;
+}
+.main_canvas{
+    position: relative;
+}
+.timer{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    font-size: 40px;
+    font-weight: bold;
+    background-color: #000;
+    width: 100%;
+    color: #fff;
+    text-align: center;
+    opacity: 0;
+    transition: .5s;
+}
+.timer.active{
+    opacity: 1;
 }

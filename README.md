@@ -37,3 +37,13 @@ Tetra = Tetremino = Piece : tous font refernce a un meme element
 <!-- 14 - Supprimer les lignes pleine -->
 <!-- 15 - Avoir la possibilite de voir le prochain tetra -->
 <!-- 16 - Ajout du Game Over (meme une fonction qui restar le jeu feras l'affaire) -->
+17 - Rotation inverse
+18 - cree des fonction pour les diffrent action du jeu :
+     - Rotation inverse
+     - Descente rapide
+19 - Cree une fonction aplayEvent qui prendras une liste de key.code,une fonction callback et le key.code sur le quel l'utilisateur a cliquer si le code est dans la liste appeler la fonction callback
+18 -  ajoute tout les evenements (pc)
+19 - ajoute les sons
+20 - Ajoute le logo
+
+-- Function qui prendras une liste de key.code et vas tous les applique une meme action --

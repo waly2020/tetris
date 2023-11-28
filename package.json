@@ -1,0 +1,20 @@
+{
+  "name": "main_tetris",
+  "version": "1.0.0",
+  "description": "Game TETRIS",
+  "main": "./js/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon ./js/html_server.js"
+  },
+  "keywords": [
+    "game",
+    "tetris"
+  ],
+  "author": "Waly le dev",
+  "license": "ISC",
+  "dependencies": {
+    "fs": "^0.0.1-security",
+    "http": "^0.0.1-security"
+  }
+}

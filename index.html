@@ -4,22 +4,61 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
     <title>TETRIS - V1</title>
 </head>
 <body>
     <div class="content-tetra">
-        <canvas id="canvas"></canvas>
+        <!-- main canvas -->
+        <div class="main_canvas">
+            <p class="timer">3</p>
+            <canvas id="canvas"></canvas>
+        </div>
+
+        <div>
+            <div class="tetris_logo">
+                <img src="./assets/images/logo.jpg"/>
+            </div>
+            <div class="content_data_user">
+                <div class="content_data_game">
+                    <p class="para">Score : <span class="data_game score">0</span></p>
+                    <p class="para">Line : <span class="data_game line">0</span></p>
+                    <p class="para">Level : <span class="data_game level">0</span></p>
+                </div>
+            </div>
+            <div class="content_canvas">
+                <div class="canvas">
+                    <p>Next</p>
+                    <canvas id="canvasNext"></canvas>
+                </div>
+                <div class="canvas">
+                    <p>bag</p>
+                    <canvas id="canvasBag"></canvas>
+                </div>
+            </div>
+            <button class="btn_play">PAUSE/PALY</button>
+        </div>
+
         <div class="instruction">
-            <p>P : PAUSE/PLAY</p>
-            <p>FLECHES : ROTATION/GAUCHE/DROIT</p>
-            <p>ESAPACE : DESCENTE RAPIDE</p>
-            <p>R : EFFACE LA GRILLE DE JEU</p>
-            <canvas id="canvasNext"></canvas>
+            <h3>CONTROLS</h3>
+            <p><span class="inst_icon">p</span> PAUSE/PALY</p>
+            <p><span class="inst_icon"><i class="bi bi-arrow-up"></i></span> ROTATE</p>
+            <p><span class="inst_icon"><i class="bi bi-arrow-left"></i></span> LEFT</p>
+            <p><span class="inst_icon"><i class="bi bi-arrow-right"></i></span> RIGHT</p>
+            <p><span class="inst_icon"><i class="bi bi-arrow-down"></i></span> BOTTOM</p>
+            <p><span class="inst_icon">ESAPACE</span> HARD DROP</p>
+            <p><span class="inst_icon">SHIFT</span> | <span class="inst_icon">C</span> ADD TO BAG</p>
+            <p><span class="inst_icon">esp</span> RESET GAME</p>
+            <p>
+                Tetris © 1985~2020 Tetris Holding. Tetris logos, Tetris theme song and Tetriminos are trademarks of Tetris Holding. The Tetris trade dress is owned by Tetris Holding. Licensed to The Tetris Company. Tetris Game Design by Alexey Pajitnov. Tetris Logo Design by Roger Dean. All Rights Reserved.
+            </p>
         </div>
     </div>
+    <script src="./js/sound.js"></script>
     <script src="./js/gameobject.js"></script>
     <script src="./js/utils.js"></script>
     <script src="./js/variables.js"></script>
+    <script src="./js/functionaControl.js"></script>
     <script src="./js/gamemanager.js"></script>
     <script src="./js/main.js"></script>
 </body>

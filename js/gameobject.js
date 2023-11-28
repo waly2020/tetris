@@ -11,6 +11,7 @@ class Tetras {
         this.y = y;
         this.forme = forme;
         this.color = color;
+        this.square = 30;
     }
     /**
      * 

@@ -19,8 +19,8 @@ function drawTetra(context,tetra){
           let value = col[x];
           if(value){
               context.beginPath();
-              context.fillStyle = tetra.color;
-              context.fillRect(tetra.x + x,tetra.y + y,1,1);
+              context.fillStyle = COLORS[value];
+              context.fillRect((tetra.x + x) * tetra.square,(tetra.y + y) * tetra.square,tetra.square,tetra.square);
               context.closePath();
           }
       }
@@ -31,7 +31,7 @@ function drawTetra(context,tetra){
  * @param {CanvasRenderingContext2D} context 
  * @param {[[number]]} form 
  */
-function drawForm(context,form){
+function drawForm(context,form,square = 30){
   for(let y = 0; y < form.length; y++){
     let row = form[y];
     for(let x = 0; x < row.length; x++){
@@ -39,7 +39,7 @@ function drawForm(context,form){
       if(value){
         context.beginPath();
         context.fillStyle = COLORS[value];
-        context.fillRect(x,y,1,1);
+        context.fillRect(x * square,y * square,square,square);
         context.closePath();
       }
     }
@@ -66,11 +66,26 @@ function randomColor(){
   return `rgb(${r},${g},${b})`;
 }
 /**
- *
+ * Rotation dans le sens normal des aiguilles d'une montre
  * @param {Tetras} form Tetromino
  * @return {Tetras} copy de la piece.
  */
 function rotateForm(tetra) {
+  let copy = JSON.parse(JSON.stringify(tetra));
+  for (let y = 0; y < copy.forme.length; ++y) {
+    for (let x = 0; x < y; ++x) {
+      [copy.forme[x][y], copy.forme[y][x]] = [copy.forme[y][x], copy.forme[x][y]];
+    }
+  }
+  copy.forme.forEach((row) => row.reverse());
+  return copy;
+}
+/**
+ * Rotation dans le sens inversw des aiguilles d'une montre
+ * @param {Tetras} form Tetromino
+ * @return {Tetras} copy de la piece.
+ */
+function rotateInverseForm(tetra) {
   let copy = JSON.parse(JSON.stringify(tetra));
   for (let y = 0; y < copy.forme.length; ++y) {
     for (let x = 0; x < y; ++x) {
@@ -111,7 +126,7 @@ function destroy(item,arrayOfItem){
  * @param {Board} board 
  * @param {CanvasRenderingContext2D} context
  */
-function drawBoard(context,board){
+function drawBoard(context,board,square = 30){
   for(let y = 0; y < board.board.length; y++){
     let row = board.board[y];
     for(let x = 0; x < row.length; x++){
@@ -119,7 +134,12 @@ function drawBoard(context,board){
       if(value){
         context.beginPath();
         context.fillStyle = COLORS[value];
-        context.fillRect(x,y,1,1);
+        context.fillRect(x * square,y * square,square,square);
+        context.closePath();
+      }else{
+        context.beginPath();
+        context.strokeStyle = "#eee";
+        context.strokeRect(x * square,y * square,square,square);
         context.closePath();
       }
     }
@@ -135,4 +155,58 @@ function delai(currentTime,timeToStart,callback){
   if(currentTime === timeToStart){
     callback();
   }
+}
+/**
+ * 
+ * @param {[number]} keyCodes 
+ * @param {KeyboardEvent} event
+ * @param {boolean} canAply
+ * @param {() => void} callback 
+ */
+function aplayEvents(event,keyCodes,canAply,callback){
+  if(keyCodes.includes(event.keyCode) || keyCodes.includes(event.code)){
+    if(canAply){
+      callback();
+    }
+  }
+}
+
+/**
+ * dessiné du texte
+ * @param {CanvasRenderingContext2D} context
+**/
+function drawText(context,text = "new text",x = 0,y = 0,size = 16,color = "#000"){
+  context.beginPath();
+  context.font = `${size}px serif`;
+  context.fillStyle = `${color}`
+  context.fillText(`${text}`,x,y + size);
+  context.closePath();
+}
+function updateParaLevels(){
+  levelHtml.forEach(para =>{
+    para.textContent = levels[para.classList[1]];
+})
+}
+
+/**
+ * 
+ * @param {number} timer 
+ * @param {function({timer : number,end : boolean})} callback 
+ */
+function timer(timer,callback){
+  let statut = {
+    timer : timer,
+    end : false
+  }
+  let id = setInterval(() =>{
+      statut.timer--;
+      
+      if(statut.timer <= 0){
+          statut.end = true;
+          callback(statut);
+          clearInterval(id);
+      }else{
+        callback(statut);
+      }
+  },1000);
 }
