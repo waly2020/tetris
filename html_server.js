@@ -1,20 +1,52 @@
-function start_html_server() {
-    const http = require('http');
-    const fs = require('fs');
+const http = require('http');
+const fs = require('fs');
+const path = require('path');
 
+function start_html_server() {
     const hostname = '0.0.0.0';
     const port = 8080;
 
     const server = http.createServer(function(request, response) {
-        response.writeHeader(200, {"Content-Type": "text/html"});
-        html = fs.readFileSync('./index.html', 'utf8');
-        response.write(html);
-        response.end();
+  
+        const url = request.url === '/' ? '/index.html' : request.url;
+        const filePath = path.join(__dirname, url);
+
+        fs.readFile(filePath, (err, content) => {
+            if (err) {
+                response.writeHead(404);
+                response.end();
+            } else {
+                response.writeHead(200, { 'Content-Type': getContentType(filePath) });
+                response.write(content);
+                response.end();
+            }
+        });
     }).listen(port, hostname, () => {
-        console.log("Server running at http://web-XXXXXXXXX.docode.YYYY.qwasar.io");
-        console.log("Replace XXXXXXXXX by your current workspace ID");
-        console.log("(look at the URL of this page and XXXXXXXXX.docode.YYYY.qwasar.io, XXXXXXXXX is your workspace ID and YYYY is your zone)");
+        console.log(`Server running at http://localhost:8080`);
     });
 }
 
+// Démarrer le serveur
 start_html_server();
+
+// Fonction pour déterminer le type de contenu en fonction de l'extension du fichier
+function getContentType(filePath) {
+    const extname = path.extname(filePath);
+    
+    switch (extname) {
+        case '.html':
+            return 'text/html';
+        case '.css':
+            return 'text/css';
+        case '.js':
+            return 'text/*';
+        case '.jpg':
+            return 'image/*';
+        case '.wav':
+            return 'audio/*';
+        case '.mp3':
+            return 'audio/*';
+        default:
+            return 'application/octet-stream';
+    }
+}

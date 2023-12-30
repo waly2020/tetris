@@ -59,7 +59,6 @@ class Board {
         return newPoseY <= (paramTetra.row/2) - 1;
     }
     notOccupied(x, y) {
-        // console.log(this.board[y][x] == 0);
         return this.board[y] && this.board[y][x] === 0;
       }
     /**

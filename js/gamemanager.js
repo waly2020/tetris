@@ -1,7 +1,6 @@
 document.addEventListener("keydown",(e)=>{
     e.preventDefault();
     let code = e.keyCode;
-    console.log(code,e.code);
     // deplacement X,+Y
     aplayEvents(e,[37,39,73],play,() =>{
         if(boarde.pieceCanMove(USERACTIONS[code](currentTetra))){
